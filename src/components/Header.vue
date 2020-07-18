@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">CMS ShoppingCart</a>
+        <router-link class="navbar-brand" to="/">CMS ShoppingCart</router-link>
         <button
             class="navbar-toggler"
             type="button"
@@ -16,7 +16,12 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active" v-for="(p, i) in pages" :key="i">
-                    <a class="nav-link" href="#">{{ p.name }}</a>
+                    <router-link
+                        class="nav-link"
+                        v-if="p.slug != 'home'"
+                        :to="'/' + p.slug"
+                        >{{ p.name }}</router-link
+                    >
                 </li>
             </ul>
         </div>
