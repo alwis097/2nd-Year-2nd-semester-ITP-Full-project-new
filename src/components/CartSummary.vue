@@ -6,6 +6,9 @@
         <span v-else>
             Your cart is empty.
         </span>
+        <router-link class="text-white" v-if="itemCount > 0" to="/cart">
+            <i class="fa fa-shopping-cart"></i>
+        </router-link>
     </div>
 </template>
 
