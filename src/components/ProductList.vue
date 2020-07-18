@@ -15,7 +15,7 @@
                         {{ p.description }}
                     </p>
                     <p>
-                        {{ p.price}}
+                        {{ p.price | currency }}
                     </p>
                     <p>
                         <button class="btn btn-primary">Add to cart</button>
@@ -42,6 +42,11 @@ export default {
     created() {
         const category = this.$route.params.category;
         this.setProductsByCategoryAction(category);
+    },
+    beforeRouteUpdate (to, from, next) {
+        const category = to.params.category;
+        this.setProductsByCategoryAction(category);
+        next();
     }
 };
 </script>
