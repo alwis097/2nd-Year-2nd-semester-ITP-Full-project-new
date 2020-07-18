@@ -25,12 +25,16 @@
                 </li>
             </ul>
         </div>
+        <CartSummary />
     </nav>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import CartSummary from "./CartSummary";
+
 export default {
+    components: { CartSummary },
     computed: {
         ...mapState(["pages"]),
     },
