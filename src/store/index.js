@@ -9,6 +9,7 @@ const baseUrl = "http://localhost:3000";
 const pagesUrl = `${baseUrl}/pages`;
 const categoriesUrl = `${baseUrl}/categories`;
 const productsUrl = `${baseUrl}/products`;
+const productImagesUrl = `${baseUrl}/media/products/`;
 
 export default new Vuex.Store({
     strict: true,
@@ -16,6 +17,7 @@ export default new Vuex.Store({
         pages: [],
         categories: [],
         products: [],
+        productImages: productImagesUrl,
     },
     mutations: {
         setPages(state, pages) {
@@ -46,6 +48,8 @@ export default new Vuex.Store({
             } else {
                 url = `${productsUrl}`;
             }
+
+            context.commit("setProducts", (await Axios.get(url)).data);
         },
     },
 });
