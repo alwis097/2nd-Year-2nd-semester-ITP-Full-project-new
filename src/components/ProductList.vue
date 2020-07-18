@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 
 import CategoryList from "./CategoryList";
 import ProductPagination from "./ProductPagination";
@@ -39,15 +39,20 @@ export default {
         ...mapState(["products", "productImages"]),
     },
     methods: {
-        ...mapActions(["setProductsByCategoryAction"])
+        ...mapActions(["setProductsByCategoryAction"]),
+        ...mapMutations(["setCurrentCategory", "setCurrentPage"])
     },
     created() {
+        this.setCurrentPage(1);
         const category = this.$route.params.category;
         this.setProductsByCategoryAction(category);
+        this.setCurrentCategory(category);
     },
     beforeRouteUpdate (to, from, next) {
+        this.setCurrentPage(1);
         const category = to.params.category;
         this.setProductsByCategoryAction(category);
+        this.setCurrentCategory(category);
         next();
     }
 };
