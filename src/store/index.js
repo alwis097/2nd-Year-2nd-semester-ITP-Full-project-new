@@ -8,12 +8,14 @@ Vue.use(Vuex);
 const baseUrl = "http://localhost:3000";
 const pagesUrl = `${baseUrl}/pages`;
 const categoriesUrl = `${baseUrl}/categories`;
+const productsUrl = `${baseUrl}/products`;
 
 export default new Vuex.Store({
     strict: true,
     state: {
         pages: [],
         categories: [],
+        products: [],
     },
     mutations: {
         setPages(state, pages) {
@@ -21,6 +23,9 @@ export default new Vuex.Store({
         },
         setCategories(state, categories) {
             state.categories = categories;
+        },
+        setProducts(state, products) {
+            state.products = products;
         },
     },
     actions: {
@@ -32,6 +37,15 @@ export default new Vuex.Store({
                 "setCategories",
                 (await Axios.get(categoriesUrl)).data
             );
+        },
+        async setProductsByCategoryAction(context, category) {
+            let url;
+
+            if (category != "all") {
+                url = `${productsUrl}/${category}`;
+            } else {
+                url = `${productsUrl}`;
+            }
         },
     },
 });
