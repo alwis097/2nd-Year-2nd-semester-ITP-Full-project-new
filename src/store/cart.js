@@ -20,7 +20,7 @@ export default {
     mutations: {
         addProduct(state, product) {
             const cartItem = state.cart.find(
-                (cartItem) => cartItem.product.id == product.id
+                (cartItem) => cartItem.product._id == product._id
             );
             if (cartItem != null) {
                 cartItem.quantity++;
@@ -28,6 +28,32 @@ export default {
                 state.cart.push({ product: product, quantity: 1 });
             }
         },
+
+        subtractProduct(state, id) {
+            const cartItem = state.cart.find(
+                (cartItem) => cartItem.product._id == id
+            );
+            if (cartItem.quantity == 1) {
+                const index = state.cart.findIndex(
+                    (cartItem) => cartItem.product._id == id
+                );
+                if (index != -1) {
+                    state.cart.splice(index, 1);
+                }
+            } else {
+                cartItem.quantity--;
+            }
+        },
+
+        removeProduct(state, id) {
+            const index = state.cart.findIndex(
+                (cartItem) => cartItem.product._id == id
+            );
+            if (index != -1) {
+                state.cart.splice(index, 1);
+            }
+        },
+
         setCartData(state, data) {
             state.cart = data;
         },
@@ -50,5 +76,8 @@ export default {
                 { deep: true }
             );
         },
+        clearCartData(context) {
+            context.commit("setCartData", []);
+        }
     },
 };
