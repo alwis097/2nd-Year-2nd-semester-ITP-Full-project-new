@@ -29,6 +29,9 @@ export default new Vuex.Store({
         pageSize: 4,
         currentCategory: "all",
     },
+    getters: {
+        pageById: (state) => (id) => state.pages.find((p) => p._id == id),
+    },
     mutations: {
         setPages(state, pages) {
             state.pages = pages;
@@ -91,6 +94,10 @@ export default new Vuex.Store({
 
         async addPage(context, page) {
             await Axios.post(pagesUrl, page);
+            context.commit("setPages", (await Axios.get(pagesUrl)).data);
+        },
+        async editPage(context, page) {
+            await Axios.put(`${pagesUrl}/${page._id}`, page);
             context.commit("setPages", (await Axios.get(pagesUrl)).data);
         },
     },

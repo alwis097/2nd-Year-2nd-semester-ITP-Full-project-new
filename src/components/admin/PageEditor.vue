@@ -49,7 +49,7 @@ export default {
         },
     },
     methods: {
-        ...mapActions(["addPage"]),
+        ...mapActions(["addPage", "editPage"]),
         async handlePage() {
             if (this.editMode) {
                 await this.editPage(this.page);
@@ -58,6 +58,14 @@ export default {
             }
 
             this.$router.push("/admin/pages");
+        },
+    },
+    created() {
+        if (this.editMode) {
+            Object.assign(
+                this.page,
+                this.$store.getters.pageById(this.$route.params["id"])
+            );
         }
     },
 };

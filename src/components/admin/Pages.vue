@@ -19,7 +19,10 @@
                     <td class="align-middle">{{ p.name }}</td>
                     <td class="align-middle">{{ p.slug }}</td>
                     <td class="align-middle">
-                        <button class="btn btn-sm btn-secondary mx-2">
+                        <button
+                            class="btn btn-sm btn-secondary mx-2"
+                            @click="handleEdit(p)"
+                        >
                             Edit
                         </button>
                         <button class="btn btn-sm btn-danger mx-2">
@@ -38,6 +41,11 @@ import { mapState } from "vuex";
 export default {
     computed: {
         ...mapState(["pages"]),
+    },
+    methods: {
+        handleEdit(page) {
+            this.$router.push(`/admin/pages/edit/${page._id}`);
+        },
     },
 };
 </script>
