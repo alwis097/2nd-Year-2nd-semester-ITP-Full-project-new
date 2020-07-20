@@ -17,7 +17,7 @@ export default new Vuex.Store({
     strict: true,
     modules: {
         cart: CartModule,
-        orders: OrdersModule
+        orders: OrdersModule,
     },
     state: {
         pages: [],
@@ -27,7 +27,7 @@ export default new Vuex.Store({
         currentPage: 1,
         pageCount: 0,
         pageSize: 4,
-        currentCategory: "all"
+        currentCategory: "all",
     },
     mutations: {
         setPages(state, pages) {
@@ -47,7 +47,7 @@ export default new Vuex.Store({
         },
         setCurrentCategory(state, category) {
             state.currentCategory = category;
-        }
+        },
     },
     actions: {
         async setPagesAction(context) {
@@ -87,6 +87,11 @@ export default new Vuex.Store({
             }
 
             context.commit("setProducts", (await Axios.get(url)).data);
+        },
+
+        async addPage(context, page) {
+            await Axios.post(pagesUrl, page);
+            context.commit("setPages", (await Axios.get(pagesUrl)).data);
         },
     },
 });

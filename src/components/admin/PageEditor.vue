@@ -6,24 +6,24 @@
 
         <div class="form-group">
             <label for="">Name</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" v-model="page.name" />
         </div>
 
         <div class="form-group">
             <label for="">Slug</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" v-model="page.slug" />
         </div>
 
         <div class="form-group">
             <label for="">Content</label>
-            <textarea class="form-control"></textarea>
+            <textarea class="form-control" v-model="page.content"></textarea>
         </div>
 
         <div class="text-center">
             <router-link class="btn btn-secondary m-1" to="/admin/pages"
                 >Back</router-link
             >
-            <button class="btn btn-primary m-1">
+            <button class="btn btn-primary m-1" @click="handlePage">
                 {{ editMode ? "Edit" : "Add" }}
             </button>
         </div>
@@ -31,11 +31,34 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
+    data() {
+        return {
+            page: {
+                name: null,
+                slug: null,
+                content: null,
+            },
+        };
+    },
     computed: {
-        ...mapState(["pages"]),
+        editMode() {
+            return this.$route.params["op"] == "edit";
+        },
+    },
+    methods: {
+        ...mapActions(["addPage"]),
+        async handlePage() {
+            if (this.editMode) {
+                await this.editPage(this.page);
+            } else {
+                await this.addPage(this.page);
+            }
+
+            this.$router.push("/admin/pages");
+        }
     },
 };
 </script>
