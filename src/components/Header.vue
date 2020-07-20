@@ -23,6 +23,11 @@
                         >{{ p.name }}</router-link
                     >
                 </li>
+                <li class="nav-item active">
+                    <router-link class="nav-link" to="/admin"
+                        >Admin</router-link
+                    >
+                </li>
             </ul>
         </div>
         <CartSummary />
