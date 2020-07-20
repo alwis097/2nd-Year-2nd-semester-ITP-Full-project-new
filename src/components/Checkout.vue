@@ -25,7 +25,9 @@
             <router-link class="btn btn-secondary m-1" to="/cart"
                 >Back</router-link
             >
-            <button class="btn btn-primary m-1">Place Order</button>
+            <button class="btn btn-primary m-1" @click="submitOrder">
+                Place Order
+            </button>
         </div>
     </div>
 </template>
@@ -54,8 +56,22 @@ export default {
     methods: {
         ...mapActions({
             storeOrder: "orders/storeOrderAction",
-            clearCartData: "cart/clearCartData"
-        })
+            clearCartData: "cart/clearCartData",
+        }),
+        async submitOrder() {
+            const order = new FormData();
+
+            order.append("name", this.order.name);
+            order.append("email", this.order.email);
+            order.append("address", this.order.address);
+            order.append("cart", JSON.stringify(this.cart));
+            order.append("total", this.total);
+
+            await this.storeOrder(order);
+
+            this.clearCartData();
+            this.$router.push("/thanks");
+        },
     },
 };
 </script>
