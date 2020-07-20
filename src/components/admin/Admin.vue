@@ -11,5 +11,8 @@
                 >Orders</router-link
             >
         </div>
+        <div class="col">
+            <router-view />
+        </div>
     </div>
 </template>

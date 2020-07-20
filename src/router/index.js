@@ -8,6 +8,7 @@ import Checkout from "../components/Checkout";
 import Thanks from "../components/Thanks";
 
 import Admin from "../components/admin/Admin";
+import AdminPages from "../components/admin/Pages";
 
 Vue.use(VueRouter);
 
@@ -19,7 +20,13 @@ export default new VueRouter({
         { path: "/thanks", component: Thanks },
         { path: "/checkout", component: Checkout },
         { path: "/categories/:category", component: ProductList },
-        { path: "/admin", component: Admin },
+
+        {
+            path: "/admin",
+            component: Admin,
+            children: [{ path: "pages", component: AdminPages }],
+        },
+
         { path: "/:slug?", component: Pages },
         { path: "*", redirect: "/" },
     ],
