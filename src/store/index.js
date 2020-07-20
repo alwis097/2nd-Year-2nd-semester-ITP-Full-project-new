@@ -31,6 +31,7 @@ export default new Vuex.Store({
     },
     getters: {
         pageById: (state) => (id) => state.pages.find((p) => p._id == id),
+        productById: (state) => (id) => state.products.find((p) => p._id == id),
     },
     mutations: {
         setPages(state, pages) {

@@ -51,7 +51,7 @@
             <router-link class="btn btn-secondary m-1" to="/admin/pages"
                 >Back</router-link
             >
-            <button class="btn btn-primary m-1" @click="handlePage">
+            <button class="btn btn-primary m-1" @click="handleProduct">
                 {{ editMode ? "Edit" : "Add" }}
             </button>
         </div>
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 
 export default {
     data() {
@@ -80,22 +80,44 @@ export default {
         },
     },
     methods: {
-        ...mapActions(["addPage", "editPage"]),
-        async handlePage() {
+        ...mapMutations(["setCurrentPage"]),
+        ...mapActions(["addProduct", "editProduct"]),
+        onFileSelected(e) {
+            this.product.image = e.target.files[0];
+        },
+        onChange(e) {
+            this.product.category = e.target.value;
+        },
+        async handleProduct() {
+            const product = new FormData();
+
+            product.append("name", this.product.name);
+            product.append("description", this.product.description);
+            product.append("price", this.product.price);
+            product.append("imageUpload", this.product.image);
+            product.append(
+                "category",
+                this.product.category.slug || this.product.category
+            );
+
             if (this.editMode) {
-                await this.editPage(this.page);
+                product.append("id", this.product._id);
+                product.append("image", this.product.image.name);
+
+                await this.editProduct(this.product);
             } else {
-                await this.addPage(this.page);
+                await this.addProduct(this.product);
             }
 
-            this.$router.push("/admin/pages");
+            this.setCurrentPage(1);
+            this.$router.push("/admin/products");
         },
     },
     created() {
         if (this.editMode) {
             Object.assign(
-                this.page,
-                this.$store.getters.pageById(this.$route.params["id"])
+                this.product,
+                this.$store.getters.productById(this.$route.params["id"])
             );
         }
     },
