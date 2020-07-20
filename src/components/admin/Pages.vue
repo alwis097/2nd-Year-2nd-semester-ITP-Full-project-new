@@ -25,7 +25,10 @@
                         >
                             Edit
                         </button>
-                        <button class="btn btn-sm btn-danger mx-2">
+                        <button
+                            class="btn btn-sm btn-danger mx-2"
+                            @click="deletePage(p)"
+                        >
                             Delete
                         </button>
                     </td>
@@ -36,13 +39,14 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
     computed: {
         ...mapState(["pages"]),
     },
     methods: {
+        ...mapActions(["deletePage"]),
         handleEdit(page) {
             this.$router.push(`/admin/pages/edit/${page._id}`);
         },

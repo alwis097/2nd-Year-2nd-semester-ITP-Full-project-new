@@ -100,5 +100,9 @@ export default new Vuex.Store({
             await Axios.put(`${pagesUrl}/${page._id}`, page);
             context.commit("setPages", (await Axios.get(pagesUrl)).data);
         },
+        async deletePage(context, page) {
+            await Axios.delete(`${pagesUrl}/${page._id}`, page);
+            context.commit("setPages", (await Axios.get(pagesUrl)).data);
+        },
     },
 });
