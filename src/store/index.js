@@ -5,7 +5,7 @@ import Axios from "axios";
 
 import CartModule from "./cart";
 import OrdersModule from "./orders";
-import AuthModule from "./orders";
+import AuthModule from "./auth";
 
 Vue.use(Vuex);
 

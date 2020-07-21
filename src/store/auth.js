@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-const loginUrl = `http://localhost:3000/login`;
+const loginUrl = `http://localhost:3000/auth`;
 
 export default {
     namespaced: true,
@@ -14,7 +14,7 @@ export default {
         },
     },
     actions: {
-        async authenticate(context, order) {
+        async authenticate(context, credentials) {
             let response = await Axios.post(loginUrl, credentials);
             if (response.data.success == true) {
                 context.commit("setAuthenticate");
