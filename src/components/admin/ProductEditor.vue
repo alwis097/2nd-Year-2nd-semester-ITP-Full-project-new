@@ -104,9 +104,9 @@ export default {
                 product.append("id", this.product._id);
                 product.append("image", this.product.image.name);
 
-                await this.editProduct(this.product);
+                await this.editProduct(product);
             } else {
-                await this.addProduct(this.product);
+                await this.addProduct(product);
             }
 
             this.setCurrentPage(1);

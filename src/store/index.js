@@ -109,5 +109,8 @@ export default new Vuex.Store({
         async addProduct(context, product) {
             await Axios.post(productsUrl, product);
         },
+        async editProduct(context, product) {
+            await Axios.put(productsUrl, product);
+        },
     },
 });
