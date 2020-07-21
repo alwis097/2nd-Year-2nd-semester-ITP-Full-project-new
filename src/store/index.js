@@ -102,7 +102,7 @@ export default new Vuex.Store({
             context.commit("setPages", (await Axios.get(pagesUrl)).data);
         },
         async deletePage(context, page) {
-            await Axios.delete(`${pagesUrl}/${page._id}`, page);
+            await Axios.delete(`${pagesUrl}/${page._id}`);
             context.commit("setPages", (await Axios.get(pagesUrl)).data);
         },
 
@@ -111,6 +111,12 @@ export default new Vuex.Store({
         },
         async editProduct(context, product) {
             await Axios.put(productsUrl, product);
+        },
+        async deleteProduct(context, product) {
+            await Axios.delete(`${productsUrl}/${product._id}`);
+
+            const url = `${productsUrl}?p=${context.state.currentPage}`;
+            context.commit("setProducts", (await Axios.get(url)).data);
         },
     },
 });
