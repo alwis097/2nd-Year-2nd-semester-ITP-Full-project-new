@@ -16,7 +16,8 @@
 
         <div class="form-group">
             <label for="">Content</label>
-            <textarea class="form-control" v-model="page.content"></textarea>
+            <!-- <textarea class="form-control" v-model="page.content"></textarea> -->
+            <vue-editor v-model="page.content"></vue-editor>
         </div>
 
         <div class="text-center">

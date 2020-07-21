@@ -9,6 +9,9 @@ import "font-awesome/css/font-awesome.min.css";
 import store from "./store";
 import router from "./router";
 
+import Vue2Editor from "vue2-editor";
+Vue.use(Vue2Editor);
+
 Vue.filter("currency", (value) =>
     new Intl.NumberFormat("en-US", {
         style: "currency",
