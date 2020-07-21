@@ -9,7 +9,7 @@ export default {
         authenticated: false,
     },
     mutations: {
-        setAuthenticateds(state) {
+        setAuthenticate(state) {
             state.authenticated = true;
         },
     },
@@ -17,7 +17,7 @@ export default {
         async authenticate(context, order) {
             let response = await Axios.post(loginUrl, credentials);
             if (response.data.success == true) {
-                context.commit("setAuthenticateds");
+                context.commit("setAuthenticate");
             }
         },
     },
