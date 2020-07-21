@@ -12,6 +12,7 @@ import AdminPages from "../components/admin/Pages";
 import PageEditor from "../components/admin/PageEditor";
 import Products from "../components/admin/Products";
 import ProductEditor from "../components/admin/ProductEditor";
+import Orders from "../components/admin/Orders";
 
 Vue.use(VueRouter);
 
@@ -32,6 +33,7 @@ export default new VueRouter({
                 { path: "pages/:op(add|edit)/:id?", component: PageEditor },
                 { path: "products", component: Products },
                 { path: "products/:op(add|edit)/:id?", component: ProductEditor },
+                { path: "orders", component: Orders },
                 { path: "*", redirect: "/admin/products" },
             ],
         },
